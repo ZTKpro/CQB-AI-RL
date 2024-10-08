@@ -17,16 +17,16 @@ pygame.display.set_caption("CQB AI Game")
 # Color definitions
 WHITE = (255, 255, 255)
 PLAYER_COLOR = (0, 0, 255)
-BULLET_COLOR = (255, 255, 0)
+BULLET_COLOR = (128, 0, 128)
 ENEMY_COLOR = (255, 0, 0)
 WALL_COLOR = (50, 50, 50)
 
 # Q-learning settings
-MODEL_FILE = './models/base_stage1.pkl'
+MODEL_FILE = './models/base_learn.pkl'
 ACTION_SPACE = ['rotate_left', 'rotate_right', 'shoot']
-ALPHA = 0.1  # Learning rate
+ALPHA = 0.4  # Learning rate
 GAMMA = 0.9  # Discount factor
-EPSILON = 0.1  # Exploration rate
+EPSILON = 0.4  # Exploration rate
 
 # Load or initialize Q-table
 try:
@@ -74,12 +74,12 @@ class Player:
         self.draw(screen)
 
     def ai_move(self, walls, enemy):
-        angle_to_enemy = abs(self.angle_to_enemy(enemy))
-        if self.is_enemy_in_view(enemy):
-            self.reward += max(0, 3 - angle_to_enemy)  # Reward increases as angle decreases, maximum when perfectly aligned
         current_state = self.extract_state(enemy)
         action = self.choose_action(current_state)
         self.perform_action(action)
+        angle_to_enemy = abs(self.angle_to_enemy(enemy))
+        if self.is_enemy_in_view(enemy):
+            self.reward += max(0, 3 - angle_to_enemy)
 
         # Update Q-table
         if self.previous_state is not None and self.previous_action is not None:
@@ -143,16 +143,19 @@ class Player:
             bullet.move()
             if bullet.is_off_screen():
                 self.bullets.remove(bullet)
+                if self.is_ai:
+                    self.reward -= 100  # Penalty for shooting and missing
             else:
                 for wall in walls:
                     if bullet.rect.colliderect(wall):
                         self.bullets.remove(bullet)
+                        if self.is_ai:
+                            self.reward -= 100  # Penalty for hitting a wall
                         break
                 if bullet in self.bullets and bullet.rect.colliderect(enemy.rect):
                     self.bullets.remove(bullet)
                     if self.is_ai:
-                        self.reward += round(500)  # Large reward for successfully hitting the enemy
-
+                        self.reward += 1000  # Large reward for successfully hitting the enemy
 
     def draw(self, surface):
         # Draw the viewing area
@@ -173,7 +176,7 @@ class Player:
         pygame.draw.line(surface, (255, 0, 0), self.rect.center, (laser_end_x, laser_end_y), 1)
         if pygame.Rect(laser_end_x, laser_end_y, 1, 1).colliderect(enemy.rect):
             if self.is_ai:
-                self.reward += 100  # Bonus for directly targeting the enemy
+                self.reward += 150  # Bonus for directly targeting the enemy
         pygame.draw.rect(surface, self.color, self.rect)
         for bullet in self.bullets:
             bullet.draw(surface)
