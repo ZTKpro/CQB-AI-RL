@@ -22,7 +22,7 @@ ENEMY_COLOR = (255, 0, 0)
 WALL_COLOR = (50, 50, 50)
 
 # Q-learning settings
-MODEL_FILE = './models/q_table.pkl'
+MODEL_FILE = './models/base_stage1.pkl'
 ACTION_SPACE = ['rotate_left', 'rotate_right', 'shoot']
 ALPHA = 0.1  # Learning rate
 GAMMA = 0.9  # Discount factor
@@ -45,7 +45,7 @@ VIEW_ANGLE = 90  # The total angle of the player's field of view
 # Player settings
 PLAYER_SIZE = 20
 PLAYER_SPEED = 3
-PLAYER_ROTATION_SPEED = 5
+PLAYER_ROTATION_SPEED = 4
 
 # Text settings
 FONT_SIZE = 36
@@ -74,9 +74,6 @@ class Player:
         self.draw(screen)
 
     def ai_move(self, walls, enemy):
-        angle_to_enemy = abs(self.angle_to_enemy(enemy))
-        if self.is_enemy_in_view(enemy):
-            self.reward += max(0, 45 - angle_to_enemy)  # Reward increases as angle decreases, maximum when perfectly aligned
         current_state = self.extract_state(enemy)
         action = self.choose_action(current_state)
         self.perform_action(action)
@@ -126,7 +123,7 @@ class Player:
 
     def is_enemy_in_view(self, enemy):
         angle_to_enemy = abs(self.angle_to_enemy(enemy))
-        return angle_to_enemy <= 45
+        return angle_to_enemy <= 5
 
     def shoot(self):
         current_time = pygame.time.get_ticks()
@@ -173,7 +170,7 @@ class Player:
         pygame.draw.line(surface, (255, 0, 0), self.rect.center, (laser_end_x, laser_end_y), 1)
         if pygame.Rect(laser_end_x, laser_end_y, 1, 1).colliderect(enemy.rect):
             if self.is_ai:
-                self.reward += 20  # Bonus for directly targeting the enemy
+                self.reward += 100  # Bonus for directly targeting the enemy
         pygame.draw.rect(surface, self.color, self.rect)
         for bullet in self.bullets:
             bullet.draw(surface)
