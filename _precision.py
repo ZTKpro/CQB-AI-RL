@@ -275,4 +275,4 @@ while True:
     screen.blit(reward_text, (10, 40))
 
     pygame.display.flip()
-    clock.tick(30)
+    clock.tick(60)
