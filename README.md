@@ -57,23 +57,4 @@ python main.py
 ```
 This will launch the Pygame window, where you can choose to either control the player manually or let the AI control the player.
 
-## Future Improvements
-
-- **Enhanced AI**: Use a more sophisticated model or reinforcement learning techniques for better performance.
-- **Multiplayer**: Implement multiplayer functionality, allowing both AI and human players to interact.
-- **New Levels**: Add new levels with increased difficulty and more complex layouts.
-
-## License
-
-This project is licensed under the MIT License. See `LICENSE` for more information.
-
-## Contributions
-
-Contributions are welcome! Feel free to fork the repository, create new features, or report issues.
-
-## Contact
-
-For questions or suggestions, reach out to:
-- GitHub: [your-username](https://github.com/your-username)
-- Email: [your-email@example.com](mailto:your-email@example.com)
 
