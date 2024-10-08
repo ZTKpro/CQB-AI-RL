@@ -15,13 +15,6 @@ Machine Learning RL Sandbox is a demonstration project created for exploring mac
 ## Project Structure
 
 - **models/**: Directory where saved models are stored.
-- **ai_model.pkl**: Saved machine learning model that can be reloaded into the sandbox.
-- **final.py**: Main script responsible for final testing and evaluation of the model.
-- **learning_progress.png**: Graphic file showing model training progress.
-- **precision.py**: Script for analyzing model accuracy.
-- **README.md**: Project description file.
-- **requirements.txt**: List of dependencies required to run the project.
-- **targeting.py**: Script responsible for targeting logic in the RL environment.
 
 ## Installation
 
