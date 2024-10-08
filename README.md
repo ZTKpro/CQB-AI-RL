@@ -1,60 +1,47 @@
-# CQB AI Game
+# Machine Learning RL Sandbox
 
-## Overview
+## Project Overview
 
-CQB AI Game is a Python-based 2D shooter game developed using the Pygame library. The game features a player, controlled either manually or by an AI, navigating a complex map with walls and rooms while trying to eliminate enemies. The AI is powered by a Multi-Layer Perceptron Regressor, which learns the optimal actions to maximize rewards during gameplay.
+Machine Learning RL Sandbox is a demonstration project created for exploring machine learning methods, with a particular focus on Reinforcement Learning (RL). It serves as a testing space, allowing easy experimentation with RL algorithms and the development of custom models in a safe and flexible environment.
 
-## Features
-- **AI Controlled Player**: The player can be either manually controlled or guided by a machine learning model.
-- **Enemy Interaction**: Randomly moving enemies that the player must eliminate.
-- **View Cone Visualization**: The player's field of view is displayed, and the AI rewards are based on enemy visibility.
-- **Learning Model**: The AI player learns to maximize rewards through shooting enemies and maintaining line of sight.
-- **Score Tracking**: A score is maintained based on successful enemy eliminations.
+## Key Features
+- **RL Environment**: A simple and accessible environment for quick testing of RL algorithms, without the need for complex infrastructure.
+- **Python Integration**: Python script enabling quick implementation and modification of machine learning algorithms.
+- **Learning Examples**: Includes examples and templates for training models, ideal for both beginners and advanced users.
+- **Flexible Testing Environment**: Allows modification of environment parameters and experimentation with various models and strategies.
+- **Model Storage**: Models trained in the sandbox can be saved and loaded for further experiments, enabling continued work without starting from scratch.
+- **Progress Visualization**: Supports visualization of training progress in graphical form, such as `learning_progress.png`, which helps track model performance.
+
+## Project Structure
+
+- **models/**: Directory where saved models are stored.
+- **ai_model.pkl**: Saved machine learning model that can be reloaded into the sandbox.
+- **final.py**: Main script responsible for final testing and evaluation of the model.
+- **learning_progress.png**: Graphic file showing model training progress.
+- **precision.py**: Script for analyzing model accuracy.
+- **README.md**: Project description file.
+- **requirements.txt**: List of dependencies required to run the project.
+- **targeting.py**: Script responsible for targeting logic in the RL environment.
 
 ## Installation
 
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/your-username/cqb-ai-game.git
-   cd cqb-ai-game
-   ```
-2. Install the required dependencies:
+1. Install the required dependencies:
    ```sh
    pip install -r requirements.txt
    ```
-   The `requirements.txt` file includes:
-   - pygame
-   - scikit-learn
-   - numpy
 
-## How to Play
+## How to Use
 
-- **Manual Controls**:
-  - Use `W`, `A`, `S`, `D` to move the player.
-  - Use `Q` and `E` to rotate the player left and right.
-  - Press `SPACE` to shoot.
+- **Running the Project**:
+  ```sh
+  python main.py
+  ```
+  After starting, you can begin experimenting with the provided examples or adjust parameters to suit your needs.
 
-- **AI Player**: The AI-controlled player navigates the environment, tracks enemies, and tries to maximize the reward by facing enemies and shooting.
+- **Examples**:
+  Various ready-to-use examples for training RL models are available. The scripts are well-documented, making it easy to understand the training process and adapt it to your own projects.
 
-## Game Mechanics
+## Support and Documentation
+For additional support and detailed documentation on sandbox functionality, refer to the `docs/README.md` file in the repository.
 
-- **Player Movement**: The player can move forward, backward, and rotate to change directions.
-- **Shooting Mechanic**: The player can shoot bullets to eliminate enemies.
-- **Rewards System**: The AI player gets rewards for keeping enemies in view and eliminating them, while penalties are applied for inactivity.
-- **Wall and Room Layout**: The game includes walls, rooms, and doorways, adding complexity to navigation and shooting.
-- **Model Training**: The game uses a `MLPRegressor` from scikit-learn. The model is updated with each action taken, based on the reward system.
-
-## Saving and Loading the Model
-
-- The trained model is saved to a file named `ai_model.pkl`.
-- If a saved model is found, it is loaded at the start of the game; otherwise, a new model is initialized.
-
-## Running the Game
-
-To start the game, run:
-```sh
-python main.py
-```
-This will launch the Pygame window, where you can choose to either control the player manually or let the AI control the player.
-
-
+Feel free to explore and share your results!
